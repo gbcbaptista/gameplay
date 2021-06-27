@@ -8,10 +8,26 @@ import {
 import DiscordImg from '../../assets/discord.png';
 import { styles } from './styles';
 
-export function ListHeader(){
+type Props = {
+  title: string;
+  subtitle: string;
+}
+
+export function ListHeader({ 
+  title, 
+  subtitle
+}: Props){
 
   return (
-    <View>
+    <View style={styles.container}>
+
+        <Text style={styles.title}>
+          { title }
+        </Text>
+
+        <Text style={styles.subtitle}>
+          { subtitle }
+        </Text>
       
     </View>
     

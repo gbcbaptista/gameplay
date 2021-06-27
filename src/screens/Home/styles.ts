@@ -16,5 +16,9 @@ header: {
 },
 content: {
   marginTop: 42,
+},
+matches: {
+  marginTop: 24,
+  marginLeft: 24
 }
 });
