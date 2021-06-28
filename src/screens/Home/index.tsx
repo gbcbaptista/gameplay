@@ -6,6 +6,7 @@ import {
   FlatList
 } from "react-native";
 import { Appointments } from "../../components/Appointment";
+import { Background } from "../../components/Background";
 import { ButtonAdd } from "../../components/ButtonAdd";
 import { CategorySelect } from "../../components/CategorySelect";
 import { ListDivider } from "../../components/ListDivider";
@@ -33,7 +34,19 @@ export function Home(){
       id: '2',
       guild: {
         id: '1',
-        name: 'Legens nerver die',
+        name: 'Gabriel',
+        icon: null,
+        owner: true
+      },
+      category: '1',
+      date: '22/06 ás 20:40h',
+      description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
+    },
+    {
+      id: '3',
+      guild: {
+        id: '1',
+        name: 'Raquel',
         icon: null,
         owner: true
       },
@@ -41,6 +54,7 @@ export function Home(){
       date: '22/06 ás 20:40h',
       description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
     }
+
   ]
 
   const handleCategorySelect = (categoryId: string) => {
@@ -48,7 +62,7 @@ export function Home(){
   }
 
   return (
-    <View>
+    <Background>
       <View style={styles.header}>
         <Profile />
         <ButtonAdd />
@@ -56,7 +70,7 @@ export function Home(){
 
       <CategorySelect
         categorySelected={category}
-        setCategory={handleCategorySelect }
+        setCategory={handleCategorySelect}
       />
 
       <View style={styles.content}>
@@ -77,7 +91,7 @@ export function Home(){
 
         />
       </View>
-    </View>
+    </Background>
   )
 }
 
