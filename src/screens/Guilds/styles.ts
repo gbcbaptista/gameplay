@@ -4,7 +4,10 @@ import { theme } from '../../global/styles/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: 24,
   },
+  guilds: {
+    width: '100%',
+  }
 });

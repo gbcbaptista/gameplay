@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { 
   View,
-  Text,
   FlatList
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
@@ -13,6 +12,7 @@ import { ListDivider } from "../../components/ListDivider";
 import { ListHeader } from "../../components/ListHeader";
 import { Profile } from "../../components/Profile";
 import { styles } from './styles';
+import { ScrollView } from "react-native-gesture-handler";
 
 export function Home(){
   const [category, setCategory] = useState('')
@@ -37,9 +37,9 @@ export function Home(){
         id: '1',
         name: 'Gabriel',
         icon: null,
-        owner: true
+        owner: false
       },
-      category: '1',
+      category: '2',
       date: '22/06 ás 20:40h',
       description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
     },
@@ -51,11 +51,34 @@ export function Home(){
         icon: null,
         owner: true
       },
-      category: '1',
+      category: '3',
+      date: '22/06 ás 20:40h',
+      description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
+    },
+    {
+      id: '4',
+      guild: {
+        id: '1',
+        name: 'Carlos',
+        icon: null,
+        owner: false
+      },
+      category: '4',
+      date: '22/06 ás 20:40h',
+      description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
+    },
+    {
+      id: '5',
+      guild: {
+        id: '1',
+        name: 'Teste',
+        icon: null,
+        owner: false
+      },
+      category: '4',
       date: '22/06 ás 20:40h',
       description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
     }
-
   ]
   
   const handleAppointmentDetails = () => {
@@ -71,39 +94,41 @@ export function Home(){
   }
 
   return (
-    <Background>
-      <View style={styles.header}>
-        <Profile />
-        <ButtonAdd onPress={handleAppointmentCreate}/>
-      </View>
+    <Background >
+      {/* <ScrollView 
+      contentContainerStyle={{ paddingBottom: 40 }}> */}
+        <View style={styles.header}>
+          <Profile />
+          <ButtonAdd onPress={handleAppointmentCreate}/>
+        </View>
 
-      <CategorySelect
-        categorySelected={category}
-        setCategory={handleCategorySelect}
-      />
-
-      <View style={styles.content}>
-        <ListHeader 
-          title='Partidas agendadas'
-          
-          subtitle={`Total ${appointments.length}`}
+        <CategorySelect
+          categorySelected={category}
+          setCategory={handleCategorySelect}
         />
 
-        <FlatList 
-            data={appointments}
-            keyExtractor={ item => item.id}
-            renderItem={({ item }) => (
-              <Appointments 
-                data={item}
-                onPress={handleAppointmentDetails}
-              />
-          )}
-            ItemSeparatorComponent={() => <ListDivider />}
-            style={styles.matches}
-            showsVerticalScrollIndicator = {false}
+        <View style={styles.content}>
+          <ListHeader 
+            title='Partidas agendadas'
+            
+            subtitle={`Total ${appointments.length}`}
+          />
 
-        />
-      </View>
+          <FlatList 
+              data={appointments}
+              keyExtractor={ item => item.id}
+              renderItem={({ item }) => (
+                <Appointments 
+                  data={item}
+                  onPress={handleAppointmentDetails}
+                />
+            )}
+              ItemSeparatorComponent={() => <ListDivider />}
+              style={styles.matches}
+              showsVerticalScrollIndicator = {false}
+          />
+        </View>
+      {/* </ScrollView> */}
     </Background>
   )
 }

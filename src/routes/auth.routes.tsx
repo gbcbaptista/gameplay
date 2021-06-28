@@ -6,6 +6,8 @@ import { SignIn } from "../screens/SignIn";
 import { theme } from '../global/styles/theme';
 import { AppointmentDetails } from '../screens/AppointmentDetails';
 import { AppointmentCreate } from '../screens/AppointmentCreate';
+import { Guilds } from '../screens/Guilds';
+import { ModalView } from '../components/ModalView';
 
 const { Navigator, Screen } = createStackNavigator ();
 
@@ -34,6 +36,10 @@ export function AuthRoutes() {
       <Screen 
         name="AppointmentCreate"
         component={AppointmentCreate}
+      />
+      <Screen 
+        name="ModalView"
+        component={ModalView}
       />
 
 

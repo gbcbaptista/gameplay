@@ -1,55 +1,55 @@
 import React from 'react';
 import { 
   View, 
-  Text, 
-  Image
+  FlatList
 } from 'react-native';
 import { ButtonIcon } from '../../components/ButtonIcon';
 import IllustrationImg from '../../assets/illustration.png'
 import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { Background } from '../../components/Background';
+import { Guild, GuildProps } from '../../components/Guild';
+import { ListDivider } from '../../components/ListDivider';
 
-export function Guilds(){
+type Props = {
+  handleGuildSelect: (guild: GuildProps) => void;
+}
 
-  const navigation = useNavigation()
+export function Guilds({ handleGuildSelect }: Props){
 
-  const handleSignIn = () => {
-    navigation.navigate('Home');
-  }
+  const guilds = [
+    {
+      id: '1',
+      name: 'Lendários',
+      icon: 'image.png',
+      owner: true
+    },
+    {
+      id: '2',
+      name: 'Lendários 2',
+      icon: 'image.png',
+      owner: false
+    }
+  ]
 
   return (
-    <Background>
+
       <View style={styles.container}>
-
-        <Image 
-          source={IllustrationImg} 
-          style={styles.image}
-          resizeMode="stretch"
+        <FlatList 
+          data={guilds}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <Guild 
+              data={item}
+              onPress={() => handleGuildSelect(item)}
+            />
+          )}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={() => <ListDivider />}
+          style={styles.guilds}
         />
-
-        <View style={styles.content}>
-
-          <Text style={styles.title}>
-            Conecte-se {'\n'}
-            e organize suas {'\n'}
-            jogatinas
-          </Text>
-
-          <Text style={styles.subtitle}>
-            Crie grupos para jogar seus games {'\n'}
-            favoritos com seus amigos
-          </Text>
-
-          <ButtonIcon 
-          title={'Entrar no Discord'}        
-          onPress={handleSignIn}
-          />
-
-        </View>
-
       </View>
-    </Background>
+
   );
 }
 

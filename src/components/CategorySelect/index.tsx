@@ -1,10 +1,6 @@
 import React from "react";
 import { RectButton, RectButtonProps } from "react-native-gesture-handler";
-import {
-  Text,
-  View,
-  ScrollView
-} from 'react-native';
+import { ScrollView } from 'react-native';
 import { styles } from './styles';
 import { categories } from "../../utils/categories";
 import { Category } from '../Category'
