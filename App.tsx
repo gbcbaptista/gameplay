@@ -6,7 +6,7 @@ import { Rajdhani_500Medium, Rajdhani_700Bold } from '@expo-google-fonts/rajdhan
 import { Routes } from './src/routes';
 import AppLoading from 'expo-app-loading';
 import { Background } from './src/components/Background';
-import { AuthContext } from './src/context/auth';
+import { AuthProvider } from './src/hooks/auth';
 
 
 
@@ -29,13 +29,9 @@ const App = () => {
           backgroundColor="transparent"
           translucent
         />
-      <AuthContext.Provider value={{
-        name: 'Gabriel',
-        email: 'gabriel@email.com',
-        avatar: 'image.png'
-      }}>
+      <AuthProvider>
         <Routes />
-      </AuthContext.Provider>
+      </AuthProvider>
     </Background>
   )
 }
