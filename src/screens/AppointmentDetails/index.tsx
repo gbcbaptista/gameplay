@@ -18,6 +18,7 @@ import { ListDivider } from '../../components/ListDivider';
 import { ButtonIcon } from '../../components/ButtonIcon';
 
 export function AppointmentDetails(){
+  
   const members =[
     {
       id: '1',
@@ -31,7 +32,14 @@ export function AppointmentDetails(){
       avatar_url: 'https://github.com/lucasTMP.png',
       status: 'offline'
     },
+    {
+      id: '3',
+      username: 'Raquel',
+      avatar_url: 'https://media-exp3.licdn.com/dms/image/C4D03AQG6qb1uocvTKA/profile-displayphoto-shrink_200_200/0/1618360943455?e=1630540800&v=beta&t=qL0KzMMjO8u3Iu6V4ov0ey2ZCRKhfgfj67D8sGkpmyk',
+      status: 'online'
+    },
   ]
+
   return (
     <Background>
       <Header 
@@ -72,7 +80,7 @@ export function AppointmentDetails(){
         renderItem={({ item }) => (
           <Member  data={item} />
         )}
-        ItemSeparatorComponent={() => <ListDivider />}
+        ItemSeparatorComponent={() => <ListDivider widthPercent={'78%'}/>}
         style={styles.members}
       />
       <View style={styles.footer}>

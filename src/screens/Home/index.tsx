@@ -95,8 +95,6 @@ export function Home(){
 
   return (
     <Background >
-      {/* <ScrollView 
-      contentContainerStyle={{ paddingBottom: 40 }}> */}
         <View style={styles.header}>
           <Profile />
           <ButtonAdd onPress={handleAppointmentCreate}/>
@@ -107,28 +105,26 @@ export function Home(){
           setCategory={handleCategorySelect}
         />
 
-        <View style={styles.content}>
           <ListHeader 
             title='Partidas agendadas'
             
             subtitle={`Total ${appointments.length}`}
           />
 
-          <FlatList 
-              data={appointments}
-              keyExtractor={ item => item.id}
-              renderItem={({ item }) => (
-                <Appointments 
-                  data={item}
-                  onPress={handleAppointmentDetails}
-                />
-            )}
-              ItemSeparatorComponent={() => <ListDivider />}
-              style={styles.matches}
-              showsVerticalScrollIndicator = {false}
-          />
-        </View>
-      {/* </ScrollView> */}
+        <FlatList 
+          data={appointments}
+          keyExtractor={ item => item.id}
+          renderItem={({ item }) => (
+            <Appointments 
+              data={item}
+              onPress={handleAppointmentDetails}
+            />
+          )}
+          ItemSeparatorComponent={() => <ListDivider widthPercent={'75%'} />}
+          contentContainerStyle={{paddingBottom: 69}}
+          style={styles.matches}
+          showsVerticalScrollIndicator = {false}
+        />
     </Background>
   )
 }

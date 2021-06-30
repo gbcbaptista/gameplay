@@ -29,6 +29,41 @@ export function Guilds({ handleGuildSelect }: Props){
       name: 'Lendários 2',
       icon: 'image.png',
       owner: false
+    },{
+      id: '3',
+      name: 'Lendários 3',
+      icon: 'image.png',
+      owner: true
+    },
+    {
+      id: '4',
+      name: 'Lendários 4',
+      icon: 'image.png',
+      owner: false
+    },
+    {
+      id: '5',
+      name: 'Lendários 5',
+      icon: 'image.png',
+      owner: true
+    },
+    {
+      id: '6',
+      name: 'Lendários 6',
+      icon: 'image.png',
+      owner: false
+    },
+    {
+      id: '7',
+      name: 'Lendários 7',
+      icon: 'image.png',
+      owner: true
+    },
+    {
+      id: '8',
+      name: 'Lendários 8',
+      icon: 'image.png',
+      owner: false
     }
   ]
 
@@ -45,7 +80,9 @@ export function Guilds({ handleGuildSelect }: Props){
             />
           )}
           showsVerticalScrollIndicator={false}
-          ItemSeparatorComponent={() => <ListDivider />}
+          contentContainerStyle={{paddingBottom: 68, paddingTop: 103 }}
+          ListHeaderComponent={() => <ListDivider widthPercent={'70%'} isCentered/>}
+          ItemSeparatorComponent={() => <ListDivider widthPercent={'70%'} isCentered/>}
           style={styles.guilds}
         />
       </View>
