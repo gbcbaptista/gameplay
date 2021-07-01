@@ -5,6 +5,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { styles } from './styles';
 import { theme } from "../../global/styles/theme";
 import { View, Text } from "react-native";
+
+
 type Props = RectButtonProps & {
   title: string;
   icon: React.FC<SvgProps>;

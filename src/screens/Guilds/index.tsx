@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Background } from '../../components/Background';
 import { Guild, GuildProps } from '../../components/Guild';
 import { ListDivider } from '../../components/ListDivider';
+import { useState } from 'react';
 
 type Props = {
   handleGuildSelect: (guild: GuildProps) => void;
@@ -17,55 +18,8 @@ type Props = {
 
 export function Guilds({ handleGuildSelect }: Props){
 
-  const guilds = [
-    {
-      id: '1',
-      name: 'Lendários',
-      icon: 'image.png',
-      owner: true
-    },
-    {
-      id: '2',
-      name: 'Lendários 2',
-      icon: 'image.png',
-      owner: false
-    },{
-      id: '3',
-      name: 'Lendários 3',
-      icon: 'image.png',
-      owner: true
-    },
-    {
-      id: '4',
-      name: 'Lendários 4',
-      icon: 'image.png',
-      owner: false
-    },
-    {
-      id: '5',
-      name: 'Lendários 5',
-      icon: 'image.png',
-      owner: true
-    },
-    {
-      id: '6',
-      name: 'Lendários 6',
-      icon: 'image.png',
-      owner: false
-    },
-    {
-      id: '7',
-      name: 'Lendários 7',
-      icon: 'image.png',
-      owner: true
-    },
-    {
-      id: '8',
-      name: 'Lendários 8',
-      icon: 'image.png',
-      owner: false
-    }
-  ]
+  const [guilds, setGuilds] = useState<GuildProps[]>([])
+  const [loading, setLoading] = useState(true)
 
   return (
 
