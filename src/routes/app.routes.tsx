@@ -11,7 +11,7 @@ import { ModalView } from '../components/ModalView';
 
 const { Navigator, Screen } = createStackNavigator ();
 
-export function AuthRoutes() {
+export function AppRoutes() {
   return(
     <Navigator
     headerMode="none"
@@ -21,10 +21,6 @@ export function AuthRoutes() {
       }
     }}
     >
-      <Screen 
-        name="SignIn"
-        component={SignIn}
-      />
       <Screen 
         name="Home"
         component={Home}
@@ -41,8 +37,6 @@ export function AuthRoutes() {
         name="ModalView"
         component={ModalView}
       />
-
-
     </Navigator>
 
   )

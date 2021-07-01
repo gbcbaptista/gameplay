@@ -80,7 +80,7 @@ export function AppointmentDetails(){
         renderItem={({ item }) => (
           <Member  data={item} />
         )}
-        ItemSeparatorComponent={() => <ListDivider widthPercent={'78%'}/>}
+        ItemSeparatorComponent={() => <ListDivider widthPercent={'78%'} />}
         style={styles.members}
       />
       <View style={styles.footer}>
