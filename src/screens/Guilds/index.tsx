@@ -3,11 +3,7 @@ import {
   View, 
   FlatList
 } from 'react-native';
-import { ButtonIcon } from '../../components/ButtonIcon';
-import IllustrationImg from '../../assets/illustration.png'
 import { styles } from './styles';
-import { useNavigation } from '@react-navigation/native';
-import { Background } from '../../components/Background';
 import { Guild, GuildProps } from '../../components/Guild';
 import { ListDivider } from '../../components/ListDivider';
 import { useState } from 'react';
@@ -26,7 +22,8 @@ export function Guilds({ handleGuildSelect }: Props){
   const [loading, setLoading] = useState(true)
 
   const fetchGuilds = async () => {
-    const response = await api.get('use/@me/guilds')
+    const response = await api.get('/users/@me/guilds')
+    
 
     setGuilds(response.data);
     setLoading(false);
@@ -50,7 +47,7 @@ export function Guilds({ handleGuildSelect }: Props){
               />
             )}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingBottom: 68, paddingTop: 103 }}
+            contentContainerStyle={{paddingBottom: 68, marginTop: 68 }}
             ListHeaderComponent={() => <ListDivider widthPercent={'70%'} isCentered/>}
             ItemSeparatorComponent={() => <ListDivider widthPercent={'70%'} isCentered/>}
             style={styles.guilds}

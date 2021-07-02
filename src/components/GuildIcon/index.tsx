@@ -1,20 +1,34 @@
 import React from "react";
-import { Image } from 'react-native'
+import { Image, View } from 'react-native'
 import { styles } from './styles';
-import { Avatar } from '../Avatar';
-import { RectButton, RectButtonProps } from "react-native-gesture-handler";
+import DiscordSvg from '../../assets/discord.svg';
+const { CDN_IMAGE } = process.env
 
+type Props = {
+  guildId: string;
+  iconId: string | null;
+}
 
-export function GuildIcon() {
-  const uri = 'https://static.wikia.nocookie.net/leagueoflegends/images/f/f2/League%2B.png/revision/latest?cb=20210516152058'
-  // const uri = 'https://github.com/gbcbaptista.png'
+export function GuildIcon({guildId, iconId}: Props) {
+  const uri = `${CDN_IMAGE}/icons/${guildId}/${iconId}.png`
+  
 
   return (
-    <Image 
-      source={{ uri }}
-      style={styles.image}
-      resizeMode='cover'
-    />
+    <View style={styles.container}>
+      { iconId
+      ?
+      <Image 
+        source={{ uri }}
+        style={styles.image}
+        resizeMode='cover'
+      />
+      :
+        <DiscordSvg 
+          width={40}
+          height={40}
+        />
+      }
+  </View>
   )
 }
 

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { 
   View,
   FlatList
 } from "react-native";
-import { useNavigation } from '@react-navigation/native';
-import { Appointments } from "../../components/Appointment";
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { Appointments, AppointmentProps } from "../../components/Appointment";
 import { Background } from "../../components/Background";
 import { ButtonAdd } from "../../components/ButtonAdd";
 import { CategorySelect } from "../../components/CategorySelect";
@@ -12,74 +12,17 @@ import { ListDivider } from "../../components/ListDivider";
 import { ListHeader } from "../../components/ListHeader";
 import { Profile } from "../../components/Profile";
 import { styles } from './styles';
-import { ScrollView } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { COLLECTION_APPOINTMENTS } from "../../configs/database";
+import Load from "../../components/Load";
+
 
 export function Home(){
   const [category, setCategory] = useState('')
+  const [ appointments, setAppointments] = useState<AppointmentProps[]>([])
+  const [loading, setLoading] = useState(true)
   const navigation = useNavigation()
 
-  const appointments = [
-    {
-      id: '1',
-      guild: {
-        id: '1',
-        name: 'Lendários',
-        icon: null,
-        owner: true
-      },
-      category: '1',
-      date: '22/06 ás 20:40h',
-      description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
-    },
-    {
-      id: '2',
-      guild: {
-        id: '1',
-        name: 'Gabriel',
-        icon: null,
-        owner: false
-      },
-      category: '2',
-      date: '22/06 ás 20:40h',
-      description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
-    },
-    {
-      id: '3',
-      guild: {
-        id: '1',
-        name: 'Raquel',
-        icon: null,
-        owner: true
-      },
-      category: '3',
-      date: '22/06 ás 20:40h',
-      description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
-    },
-    {
-      id: '4',
-      guild: {
-        id: '1',
-        name: 'Carlos',
-        icon: null,
-        owner: false
-      },
-      category: '4',
-      date: '22/06 ás 20:40h',
-      description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
-    },
-    {
-      id: '5',
-      guild: {
-        id: '1',
-        name: 'Teste',
-        icon: null,
-        owner: false
-      },
-      category: '4',
-      date: '22/06 ás 20:40h',
-      description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
-    }
-  ]
   
   const handleAppointmentDetails = () => {
     navigation.navigate('AppointmentDetails')
@@ -93,9 +36,27 @@ export function Home(){
     categoryId === category ? setCategory('') : setCategory(categoryId);
   }
 
+  const loadAppointments = async () => {
+    const response = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
+    const storage: AppointmentProps[] = response ? JSON.parse(response) : []
+
+    if (category){
+      setAppointments(storage.filter(item => item.category === category));
+    }else{
+      setAppointments(storage)
+    }
+
+    setLoading(false)
+  }
+
+  useFocusEffect(useCallback(() => {
+    loadAppointments();
+  },[category]))
+
   return (
     <Background >
         <View style={styles.header}>
+        
           <Profile />
           <ButtonAdd onPress={handleAppointmentCreate}/>
         </View>
@@ -104,27 +65,31 @@ export function Home(){
           categorySelected={category}
           setCategory={handleCategorySelect}
         />
-
-          <ListHeader 
-            title='Partidas agendadas'
-            
-            subtitle={`Total ${appointments.length}`}
-          />
-
-        <FlatList 
-          data={appointments}
-          keyExtractor={ item => item.id}
-          renderItem={({ item }) => (
-            <Appointments 
-              data={item}
-              onPress={handleAppointmentDetails}
+        {
+          loading ? <Load /> :
+          <>
+            <ListHeader 
+              title='Partidas agendadas'
+              
+              subtitle={`Total ${appointments.length}`}
             />
-          )}
-          ItemSeparatorComponent={() => <ListDivider widthPercent={'75%'} />}
-          contentContainerStyle={{paddingBottom: 69}}
-          style={styles.matches}
-          showsVerticalScrollIndicator = {false}
-        />
+
+            <FlatList 
+              data={appointments}
+              keyExtractor={ item => item.id}
+              renderItem={({ item }) => (
+                <Appointments 
+                  data={item}
+                  onPress={handleAppointmentDetails}
+                />
+              )}
+              ItemSeparatorComponent={() => <ListDivider widthPercent={'75%'} />}
+              contentContainerStyle={{paddingBottom: 69}}
+              style={styles.matches}
+              showsVerticalScrollIndicator = {false}
+            />
+          </>
+        }
     </Background>
   )
 }

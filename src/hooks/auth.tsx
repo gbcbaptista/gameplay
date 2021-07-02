@@ -72,7 +72,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           const userData ={
             ...userInfo.data,
             firstName,
-            toek: params.access_token
+            token: params.access_token
           }
 
           await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(userData) )
@@ -123,4 +123,3 @@ export {
   AuthProvider,
   useAuth
 }
-
