@@ -7,6 +7,7 @@ import {
   ScrollView,
   Platform,
   KeyboardAvoidingView,
+  Alert
 } from 'react-native';
 import { Header } from '../../components/Header';
 import { theme } from '../../global/styles/theme';
@@ -56,23 +57,32 @@ export function AppointmentCreate(){
   }
 
   async function handleSave() {
-    const newAppointment = {
-      id: uuid.v4(),
-      guild,
-      category,
-      date: `${day}/${month} às ${hour}:${minute}h`
-    };
+//MEU codigo --------------------------------------------- [FLAG]
+    if (category.length != 0 && guild.name && day.length != 0 && month.length != 0 && hour.length != 0 && minute.length != 0 && description.length != 0){
+      const newAppointment = {
+        id: uuid.v4(),
+        guild,
+        category,
+        date: `${day}/${month} às ${hour}:${minute}h`,
+        description: description
+      };
 
-    const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
-    const appointments = storage ? JSON.parse(storage) : [];
+      const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
+      const appointments = storage ? JSON.parse(storage) : [];
 
-    await AsyncStorage.setItem(
-      COLLECTION_APPOINTMENTS,
-      JSON.stringify([...appointments, newAppointment])
-    );
+      await AsyncStorage.setItem(
+        COLLECTION_APPOINTMENTS,
+        JSON.stringify([...appointments, newAppointment])
+      );
 
-    navigation.navigate('Home')
-
+      navigation.navigate('Home')
+    } else {
+      Alert.alert(
+        "Está faltando algo...",
+        "Uma categoria e uma guild deve ser selecionada!",
+        [ { text: "Ok" } ]
+      )
+    }
   }
 
   

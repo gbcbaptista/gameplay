@@ -17,9 +17,12 @@ header: {
   marginBottom: 12,
 },
 title: {
+  maxWidth: 150,
+  maxHeight: 20,
   fontFamily: theme.fonts.title700,
   color: theme.colors.heading,
   fontSize: 18,
+  overflow: 'hidden',
 },
 category: {
   fontFamily: theme.fonts.text400,

@@ -15,6 +15,7 @@ import { styles } from './styles';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLLECTION_APPOINTMENTS } from "../../configs/database";
 import Load from "../../components/Load";
+import { api } from "../../services/api";
 
 
 export function Home(){
@@ -24,8 +25,8 @@ export function Home(){
   const navigation = useNavigation()
 
   
-  const handleAppointmentDetails = () => {
-    navigation.navigate('AppointmentDetails')
+  const handleAppointmentDetails = (guildSelected: AppointmentProps) => {
+    navigation.navigate('AppointmentDetails', { guildSelected })
   }
 
   const handleAppointmentCreate = () => {
@@ -39,13 +40,17 @@ export function Home(){
   const loadAppointments = async () => {
     const response = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
     const storage: AppointmentProps[] = response ? JSON.parse(response) : []
-
+    
     if (category){
       setAppointments(storage.filter(item => item.category === category));
     }else{
       setAppointments(storage)
     }
-
+    // console.log('Cleaning all data')
+    // await AsyncStorage.setItem(
+    //   COLLECTION_APPOINTMENTS,
+    //   JSON.stringify([])
+    // );
     setLoading(false)
   }
 
@@ -80,7 +85,7 @@ export function Home(){
               renderItem={({ item }) => (
                 <Appointments 
                   data={item}
-                  onPress={handleAppointmentDetails}
+                  onPress = {() => handleAppointmentDetails(item)}
                 />
               )}
               ItemSeparatorComponent={() => <ListDivider widthPercent={'75%'} />}
