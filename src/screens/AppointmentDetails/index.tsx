@@ -76,7 +76,7 @@ export function AppointmentDetails(){
       <Header 
         title={'Detalhes'}
         action={
-          //Parei aqui com 24:23min de video
+          guildSelected.guild.owner &&
           <BorderlessButton onPress={handleShareInvitation} >
             <Fontisto
               name="share"
