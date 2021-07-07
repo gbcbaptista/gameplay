@@ -12,6 +12,7 @@ import {
 import { AppointmentProps } from "../../components/Appointment";
 import BannerImg from '../../assets/banner.png';
 import { BorderlessButton } from 'react-native-gesture-handler';
+import * as Linking from 'expo-linking'
 import { Background } from '../../components/Background';
 import { Header } from '../../components/Header';
 import { theme } from '../../global/styles/theme';
@@ -68,6 +69,10 @@ export function AppointmentDetails(){
     });
   }
 
+  const handleOpenGuild = () => {
+    Linking.openURL(widget.instant_invite)
+  }
+
   useEffect(() => {
     fetchGuildWidget()
   }, [])
@@ -122,10 +127,16 @@ export function AppointmentDetails(){
           }
         </>
       }
-
-      <View style={styles.footer}>
-        <ButtonIcon title={'Entrar na partida'} />
-      </View>
+      {
+        guildSelected.guild.owner &&
+        <View style={styles.footer}>
+          <ButtonIcon 
+            onPress={handleOpenGuild}
+            title={'Entrar na partida'} 
+            />
+        </View>
+      }
+      
 
     </Background>
   );
