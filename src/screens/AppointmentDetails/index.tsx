@@ -5,7 +5,9 @@ import {
   Text,
   View,
   FlatList,
-  Alert
+  Alert,
+  Share,
+  Platform
 } from 'react-native';
 import { AppointmentProps } from "../../components/Appointment";
 import BannerImg from '../../assets/banner.png';
@@ -55,6 +57,17 @@ export function AppointmentDetails(){
     }
   }
 
+  const handleShareInvitation = () => {
+    const message = Platform.OS === 'ios'
+    ? `Junte-se a ${guildSelected.guild.name}`
+    : widget.instant_invite;
+
+    Share.share({
+      message,
+      url: widget.instant_invite
+    });
+  }
+
   useEffect(() => {
     fetchGuildWidget()
   }, [])
@@ -63,7 +76,8 @@ export function AppointmentDetails(){
       <Header 
         title={'Detalhes'}
         action={
-          <BorderlessButton>
+          //Parei aqui com 24:23min de video
+          <BorderlessButton onPress={handleShareInvitation} >
             <Fontisto
               name="share"
               size={24}

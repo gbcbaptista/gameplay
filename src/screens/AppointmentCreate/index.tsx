@@ -79,7 +79,7 @@ export function AppointmentCreate(){
     } else {
       Alert.alert(
         "Está faltando algo...",
-        "Uma categoria e uma guild deve ser selecionada!",
+        "Todos os campos são obrigatórios verique se algum está vazio",
         [ { text: "Ok" } ]
       )
     }
